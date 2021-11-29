@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <h1>Filter the books from our database</h1>
+        <div class="form-container">
+        <form method="GET">
+        {{filter.form}}
+        <button class="btn btn-info" type="submit">Filter</button>
+        </form>
+        </div>
+        <a class="btn btn-primary" href="{% url 'create' %}">enter a book manually</a>
+        <a class="btn btn-primary" href="{% url 'search' %}">Import books from Google Books</a>
+        <a class="btn btn-danger" href="/api/v1/books">API</a>
+        <hr>
+        <h1>Books in the model:</h1>
+        <table class= "table table-dark">
+        <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Publication Date</th>
+        <th>ISBN</th>
+        <th>Number of pages</th>
+        <th>Cover</th>
+        <th>Language</th>
+        <th></th>
+        <th></th>
+        </tr>
+        <tr>
+        {% for book in book %}
+        <td>{{book.title}}</td>
+       <td>{{book.author}}</td>
+        <td>{{book.pub_date}}</td>
+       <td> {{book.ISBN}}</td>
+        <td>{{book.num_of_pages}}</td>
+        <td><img src="{{book.image_link}}" alt="no photo for this book :("></td>
+       <td> {{book.language}}</td>
+       <td><a class="btn btn-primary" href="{% url 'update' book.id %}">UPDATE</a></td>
+       <td><a class="btn btn-danger" href="{% url 'delete' book.id %}">DELETE</a></td>
+       
+        </tr>
+        
+    {% endfor %}
+    </table>
+        
+        <script src="" async defer></script>
+    </body>
+</html>
